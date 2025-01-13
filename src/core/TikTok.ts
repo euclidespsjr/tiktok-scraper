@@ -161,7 +161,7 @@ export class TikTokScraper extends EventEmitter {
         super();
         this.userIdStore = '';
         this.verifyFp = verifyFp;
-        this.mainHost = useTestEndpoints ? 'https://t.tiktok.com/' : 'https://m.tiktok.com/';
+        this.mainHost = useTestEndpoints ? 'https://t.tiktok.com/@brunamoniquesb' : 'https://m.tiktok.com/@brunamoniquesb';
         this.headers = headers;
         this.download = download;
         this.filepath = process.env.SCRAPING_FROM_DOCKER ? '/usr/app/files' : filepath || '';
@@ -347,12 +347,12 @@ export class TikTokScraper extends EventEmitter {
 
             const session = this.sessionList[Math.floor(Math.random() * this.sessionList.length)];
             if (session) {
-                this.cookieJar.setCookie(session, 'https://tiktok.com');
+                this.cookieJar.setCookie(session, 'https://tiktok.com/@brunamoniquesb');
             }
             /**
              * Set tt_webid_v2 cookie to access video url
              */
-            const cookies = this.cookieJar.getCookieString('https://tiktok.com');
+            const cookies = this.cookieJar.getCookieString('https://tiktok.com/@brunamoniquesb/');
             if (cookies.indexOf('tt_webid_v2') === -1) {
                 this.cookieJar.setCookie(`tt_webid_v2=69${makeid(17)}; Domain=tiktok.com; Path=/; Secure; hostOnly=false`, 'https://tiktok.com');
             }
@@ -601,7 +601,7 @@ export class TikTokScraper extends EventEmitter {
                  * As of August 13, 2021 the trend api endpoint requires ttwid cookie value that can be extracted by sending GET request to the tiktok trending page
                  */
                 if (this.scrapeType === 'trend') {
-                    await this.getValidHeaders(`https://www.tiktok.com/foryou`, false, 'GET');
+                    await this.getValidHeaders(`https://www.tiktok.com/@brunamoniquesb`, false, 'GET');
                 }
                 this.validHeaders = true;
             }
